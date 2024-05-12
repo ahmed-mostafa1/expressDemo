@@ -1,10 +1,4 @@
-const express = require("express");
-const app = express();
-const port = process.env.port || 3000;
-app.listen(port, () => {
-  console.log(`Hello from port ${port} ... `);
-});
-
+// *Students Data
 const Students = [
   { id: 1, name: "Ahmed", dept: "Medicine" },
   { id: 2, name: "Mohamed", dept: "Accounting" },
@@ -12,11 +6,23 @@ const Students = [
   { id: 4, name: "Ibrahim", dept: "Pharmacy" },
   { id: 5, name: "Mostafa", dept: "Law" },
 ];
+// * Init...
+const path = require("path");
+const express = require("express");
+const app = express();
+const port = process.env.port || 3000;
+app.listen(port, () => {
+  console.log(`Hello from port ${port} ... `);
+});
+
 // * HomePage
-app.get("/", (req, res) => res.send("Hello World!"));
-// * Get Custom Path
-app.get("/asd", (req, res) => {
-  res.send("Hello from ASD!");
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/main.html"));
+});
+
+// * Get Welcome Page
+app.get("/welcome.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "/welcome.html"));
 });
 // * Get specific Student
 app.get("/api/students/:id", (req, res) => {
